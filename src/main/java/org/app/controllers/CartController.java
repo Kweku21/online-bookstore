@@ -9,17 +9,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 public class CartController {
 
     private final DBConnector connector;
     private final BookController bookController;
 
+    public CartController() {
+        connector = new DBConnector();
+        bookController = new BookController();
+    }
+
     public List<Cart> getCustomerShoppingCart(Integer customer_id){
-        String query = "select c.id, b.title, b.description, c.quantity, s.name status, (b.price * c.quantity) cost" +
-                        "from cart c" +
-                        "join book b on b.id = c.book_id" +
-                        "join status s on s.id = c.status_id" +
+        String query = "select c.id, b.title, b.description, c.quantity, s.name status, (b.price * c.quantity) cost\n" +
+                        "from cart c\n" +
+                        "join book b on b.id = c.book_id\n" +
+                        "join status s on s.id = c.status_id\n" +
                         "where c.status_id =1 and c.user_id = %s;".formatted(customer_id);
 
         List<Cart> carts = new ArrayList<>();
@@ -47,10 +51,10 @@ public class CartController {
     }
 
     public Cart getShoppingCart(Integer id){
-        String query = "select c.id, b.title, b.description, c.quantity, s.name status, (b.price * c.quantity) cost" +
-                "from cart c" +
-                "join book b on b.id = c.book_id" +
-                "join status s on s.id = c.status_id" +
+        String query = "select c.id, b.title, b.description, c.quantity, s.name status, (b.price * c.quantity) cost\n" +
+                "from cart c\n" +
+                "join book b on b.id = c.book_id\n" +
+                "join status s on s.id = c.status_id\n" +
                 "where c.status_id =1 and c.id = %s;".formatted(id);
         Cart cart = null;
         try {
