@@ -12,7 +12,7 @@ public class CustomerView extends JFrame {
     private User user;
     private JPanel left,right;
 
-    private ProfilePanel profilePanel;
+    //private ProfilePanel profilePanel;
 
     private BooksPanel booksPanel;
 
@@ -63,11 +63,18 @@ public class CustomerView extends JFrame {
             right.remove(contentPanel);
             contentPanel = new ProfilePanel(user);
             right.add(contentPanel);
+            right.revalidate();
+            right.repaint();
         });
 
         books.addActionListener((event) -> {
             right.remove(right.getComponent(0));
-            right.add(booksPanel);
+            right.remove(contentPanel);
+
+            contentPanel = new BooksPanel(user,bookController);
+            right.add(contentPanel);
+            right.revalidate();
+            right.repaint();
         });
 
         orders.addActionListener((event) -> {
