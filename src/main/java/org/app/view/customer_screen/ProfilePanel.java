@@ -1,18 +1,22 @@
 package org.app.view.customer_screen;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.app.data.User;
+import org.app.view.utils.ContentPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ProfilePanel extends Panel {
+public class ProfilePanel extends ContentPanel {
     private JTextField name,phone, address,email;
     private JPasswordField password;
     private JButton update;
-    User user ;
 
     public ProfilePanel(User user) {
-        this.user = user;
+        super(user);
+
         this.name = new JTextField(20);
         this.phone = new JTextField(20);
         this.address = new JTextField(20);
@@ -22,7 +26,6 @@ public class ProfilePanel extends Panel {
 
         this.name.setText(user.getName());
         this.email.setText(user.getEmail());
-
 
         setLayout(new GridLayout(6,2));
         add(new JLabel("name"));

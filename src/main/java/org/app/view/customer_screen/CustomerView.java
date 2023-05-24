@@ -2,6 +2,7 @@ package org.app.view.customer_screen;
 
 import org.app.controllers.BookController;
 import org.app.data.User;
+import org.app.view.utils.ContentPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +12,12 @@ public class CustomerView extends JFrame {
     private User user;
     private JPanel left,right;
 
-
     private ProfilePanel profilePanel;
 
     private BooksPanel booksPanel;
 
     private OrdersPanel ordersPanel;
+    private ContentPanel contentPanel;
 
     private JButton profile, books, orders;
     private BookController bookController;
@@ -27,14 +28,14 @@ public class CustomerView extends JFrame {
 
         this.left = new JPanel();
         this.right = new JPanel();
-        this.profilePanel = new ProfilePanel(user);
-        this.booksPanel = new BooksPanel(bookController);
-        this.ordersPanel = new OrdersPanel();
+
+        contentPanel = new ProfilePanel(user);
+//        this.profilePanel = new ProfilePanel(user);
+//        this.booksPanel = new BooksPanel(bookController);
+//        this.ordersPanel = new OrdersPanel();
         this.profile = new JButton("Profile");
         this.books = new JButton("Books");
         this.orders = new JButton("Orders");
-
-
 
 
         left.setLayout(new GridLayout(3,1));
@@ -43,7 +44,7 @@ public class CustomerView extends JFrame {
         left.add(orders);
 
 
-        right.add(profilePanel);
+        right.add(contentPanel);
 
         setLayout(new BorderLayout());
         add(left,BorderLayout.WEST);
@@ -59,7 +60,9 @@ public class CustomerView extends JFrame {
 
         profile.addActionListener((event) -> {
             right.remove(right.getComponent(0));
-            right.add(profilePanel);
+            right.remove(contentPanel);
+            contentPanel = new ProfilePanel(user);
+            right.add(contentPanel);
         });
 
         books.addActionListener((event) -> {
@@ -68,10 +71,11 @@ public class CustomerView extends JFrame {
         });
 
         orders.addActionListener((event) -> {
+            System.out.println("Order Panel");
             right.remove(right.getComponent(0));
-            right.add(ordersPanel);
+            right.remove(contentPanel);
+            contentPanel = new OrdersPanel(user);
+            right.add(contentPanel);
         });
-
-
     }
 }

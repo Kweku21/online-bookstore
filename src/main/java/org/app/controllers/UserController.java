@@ -4,7 +4,6 @@ import org.app.config.DBConnector;
 import org.app.data.User;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,9 @@ public class UserController {
 
         String query = String.format("Select u.id, u.email, u.name, ut.type from user u " +
                 "join user_type ut on ut.id = u.user_type_id where email='%s' and password='%s';", email, password);
+        User user = null;
         try {
             ResultSet resultSet = connector.runSQLStatement(query);
-            User user = null;
             while (resultSet.next()) {
                 user = User.builder()
                         .id(resultSet.getInt("id"))
@@ -37,8 +36,9 @@ public class UserController {
             return user;
         } catch (Exception exception){
             System.out.println(exception);
-            return null;
+
         }
+        return null;
 
     }
 
