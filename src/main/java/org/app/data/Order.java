@@ -13,4 +13,8 @@ public class Order {
     private Integer quantity;
     private Book book;
     private User user;
+
+    public String[] toCustomerString(){
+        return new String[]{String.valueOf(id), book.getTitle(), String.valueOf(quantity), String.valueOf(cost)};
+    }
 }

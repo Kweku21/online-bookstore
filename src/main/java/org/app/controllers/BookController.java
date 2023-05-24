@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@AllArgsConstructor
 public class BookController {
     private final DBConnector connector;
 
+    public BookController() {
+        this.connector = new DBConnector();
+    }
+
     public List<Book> getAllBooks(){
-        String query = "select b.title, b.description, b.price, b.quantity, bg.name genre, a.name author from book b" +
-                        "join book_genre bg on bg.id = b.genre_id"+
-                        "join book_genre bg on bg.id = b.genre_id" +
-                        "join book_author ba on b.id = ba.book_id" +
-                        "join author a on a.id = ba.author_id" +
+        String query = "select b.title, b.description, b.price, b.quantity, bg.name genre, a.name author from book b\n" +
+                        "join book_genre bg on bg.id = b.genre_id\n"+
+                        "join book_genre bg on bg.id = b.genre_id\n" +
+                        "join book_author ba on b.id = ba.book_id\n" +
+                        "join author a on a.id = ba.author_id\n" +
                         "order by b.id desc;";
 
         List<Book> books = new ArrayList<>();
@@ -46,11 +49,11 @@ public class BookController {
 
     public Book getBook(Integer id){
 
-        String query = String.format("select b.id, b.title, b.description, b.price, b.quantity, bg.name genre, a.name author" +
-                                    "from book b" +
-                                    "join book_genre bg on bg.id = b.genre_id" +
-                                    "join book_author ba on b.id = ba.book_id" +
-                                    "join author a on a.id = ba.author_id" +
+        String query = String.format("select b.id, b.title, b.description, b.price, b.quantity, bg.name genre, a.name author\n" +
+                                    "from book b\n" +
+                                    "join book_genre bg on bg.id = b.genre_id\n" +
+                                    "join book_author ba on b.id = ba.book_id\n" +
+                                    "join author a on a.id = ba.author_id\n" +
                                     "where b.id = %s;", id);
         Book book = null;
 
@@ -81,15 +84,14 @@ public class BookController {
     }
 
     public List<Book> searchBooks(String keyword){
-        String query = "select  b.id, b.title, b.description, b.price, b.quantity, bg.name genre, a.name author" +
-                "from book b" +
-                "join book_genre bg on bg.id = b.genre_id" +
-                "join author a on b.id = a.book_id" +
-                "where b.title like '%" + keyword + "%'" +
-                "or b.description like '%" + keyword + "%'" +
-                "or a.name like '%" + keyword + "%'" +
+        String query = "select  b.id, b.title, b.description, b.price, b.quantity, bg.name genre, a.name author\n" +
+                "from book b\n" +
+                "join book_genre bg on bg.id = b.genre_id\n" +
+                "join author a on b.id = a.book_id\n" +
+                "where b.title like '%" + keyword + "%'\n" +
+                "or b.description like '%" + keyword + "%'\n" +
+                "or a.name like '%" + keyword + "%'\n" +
                 "order by b.id desc ;";
-
         List<Book> books = new ArrayList<>();
 
         try {

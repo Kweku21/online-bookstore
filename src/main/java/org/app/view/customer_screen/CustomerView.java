@@ -71,7 +71,7 @@ public class CustomerView extends JFrame {
             right.remove(right.getComponent(0));
             right.remove(contentPanel);
 
-            contentPanel = new BooksPanel(user,bookController);
+            contentPanel = new BooksPanel(user);
             right.add(contentPanel);
             right.revalidate();
             right.repaint();
