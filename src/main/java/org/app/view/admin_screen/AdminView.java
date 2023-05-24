@@ -29,7 +29,7 @@ public class AdminView extends JFrame {
     private OrdersPanel ordersPanel;
     private ContentPanel contentPanel;
 
-    private JButton profile, books, orders;
+    private JButton profile, books, orders,ordersTotal;
     private BookController bookController;
 
     public AdminView(User user) throws HeadlessException {
@@ -45,13 +45,16 @@ public class AdminView extends JFrame {
 //        this.ordersPanel = new OrdersPanel();
         this.profile = new JButton("Profile");
         this.books = new JButton("Books");
-        this.orders = new JButton("Orders");
+        this.orders = new JButton("Customer Orders");
+        this.ordersTotal = new JButton("Total Orders");
 
 
-        left.setLayout(new GridLayout(3,1));
+        left.setLayout(new GridLayout(4,1));
         left.add(profile);
         left.add(books);
         left.add(orders);
+        left.add(ordersTotal);
+
 
 
         right.add(contentPanel);
@@ -61,7 +64,7 @@ public class AdminView extends JFrame {
         add(right,BorderLayout.CENTER);
 
 
-        setTitle("User Management");
+        setTitle("Admin Management");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -91,6 +94,12 @@ public class AdminView extends JFrame {
             right.remove(right.getComponent(0));
             right.remove(contentPanel);
             contentPanel = new OrdersPanel(user);
+            right.add(contentPanel);
+        });
+        ordersTotal.addActionListener((event) -> {
+            right.remove(right.getComponent(0));
+            right.remove(contentPanel);
+            contentPanel = new TotalOrderDetailsPanel(user);
             right.add(contentPanel);
         });
     }
