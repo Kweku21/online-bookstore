@@ -55,7 +55,7 @@ public class AuthView extends JFrame {
             }
 
 
-            switch (user.getType()) {
+            switch (user.getType().toUpperCase()) {
                 /*
                 case ADMIN -> {
                     setVisible(false);
