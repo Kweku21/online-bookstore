@@ -100,15 +100,15 @@ public class UserController {
                         "('%s', '%s', '%s', 3);",email, password, name);
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            connector.runSQLStatement(query);
             query = String.format("select id from user where email='%s'", email);
-            resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLStatement(query);
             while (resultSet.next()) {
                 Integer user_id = resultSet.getInt("id");
 
                 query = String.format("INSERT INTO user_contact (phone, address, user_id) VALUES" +
                         "('%s', '%s', %s);", phone, address, user_id);
-                resultSet = connector.runSQLStatement(query);
+                connector.runSQLStatement(query);
             }
 
         }catch (Exception exception){
