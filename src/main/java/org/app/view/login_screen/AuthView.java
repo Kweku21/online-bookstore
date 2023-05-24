@@ -109,6 +109,8 @@ public class AuthView extends JFrame {
         usernameField.setText("");
         passwordField.setText("");
     }
+
+
 }
 
 

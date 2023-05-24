@@ -1,13 +1,11 @@
 package org.app.controllers;
 
-import lombok.AllArgsConstructor;
 import org.app.config.DBConnector;
 import org.app.data.Book;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class BookController {
     private final DBConnector connector;
@@ -26,7 +24,7 @@ public class BookController {
         List<Book> books = new ArrayList<>();
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 books.add(
@@ -57,7 +55,7 @@ public class BookController {
         Book book = null;
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                        book =  Book.builder()
@@ -94,7 +92,7 @@ public class BookController {
         List<Book> books = new ArrayList<>();
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
             while (resultSet.next()){
                 books.add(
                         Book.builder()

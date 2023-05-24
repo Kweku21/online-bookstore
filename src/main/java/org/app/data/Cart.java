@@ -13,4 +13,16 @@ public class Cart {
     private String status;
     private Book book;
     private Integer quantity;
+
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", cost=" + cost +
+                ", status='" + status + '\'' +
+                ", book=" + book.getTitle() +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

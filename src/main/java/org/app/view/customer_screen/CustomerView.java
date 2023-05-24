@@ -11,15 +11,8 @@ import java.util.Optional;
 public class CustomerView extends JFrame {
     private User user;
     private JPanel left,right;
-
-    //private ProfilePanel profilePanel;
-
-    private BooksPanel booksPanel;
-
-    private OrdersPanel ordersPanel;
     private ContentPanel contentPanel;
-
-    private JButton profile, books, orders;
+    private JButton profile, books, orders, cart;
     private BookController bookController;
 
     public CustomerView(User user) throws HeadlessException {
@@ -30,17 +23,16 @@ public class CustomerView extends JFrame {
         this.right = new JPanel();
 
         contentPanel = new ProfilePanel(user);
-//        this.profilePanel = new ProfilePanel(user);
-//        this.booksPanel = new BooksPanel(bookController);
-//        this.ordersPanel = new OrdersPanel();
         this.profile = new JButton("Profile");
         this.books = new JButton("Books");
         this.orders = new JButton("Orders");
+        this.cart = new JButton("Shopping Cart");
 
 
-        left.setLayout(new GridLayout(3,1));
+        left.setLayout(new GridLayout(4,1));
         left.add(profile);
         left.add(books);
+        left.add(cart);
         left.add(orders);
 
 
@@ -59,30 +51,31 @@ public class CustomerView extends JFrame {
 
 
         profile.addActionListener((event) -> {
-            right.remove(right.getComponent(0));
-            right.remove(contentPanel);
-
-            right.add(new ProfilePanel(user));
-            right.revalidate();
-            right.repaint();
+            addPanel(new ProfilePanel(user));
         });
 
         books.addActionListener((event) -> {
-            right.remove(right.getComponent(0));
-            right.remove(contentPanel);
+            addPanel(new BooksPanel(user));
+        });
 
-            right.add(new BooksPanel(user));
-            right.revalidate();
-            right.repaint();
+        cart.addActionListener((event) -> {
+            addPanel(new CartPanel(user));
         });
 
         orders.addActionListener((event) -> {
-            right.remove(right.getComponent(0));
-            right.remove(contentPanel);
-
-            right.add(new OrdersPanel(user));
-            right.revalidate();
-            right.repaint();
+            addPanel(new OrdersPanel(user));
         });
     }
+
+    public void addPanel(ContentPanel panel){
+        right.remove(right.getComponent(0));
+        right.remove(contentPanel);
+
+        right.add(panel);
+        right.revalidate();
+        right.repaint();
+    }
+
+
+
 }
