@@ -12,10 +12,12 @@ public class Main {
         UserController userController = new UserController();
         Object obj = userController.loginUser("john@example.com", "password123");
         System.out.println(obj);
+         */
 
 
         //new CustomerView(new User(1, "john@example.com", "John Do", "Customer"));
        new AuthView();
+
 
     }
 }
