@@ -1,6 +1,7 @@
 package org.app.controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.app.config.DBConnector;
 import org.app.data.Book;
 import org.app.data.Cart;
@@ -11,16 +12,19 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 public class OrderController {
 
     private final DBConnector connector;
 
+    public OrderController() {
+        this.connector = new DBConnector();
+    }
+
     public List<Order> getCustomerOrders(Integer customer_id){
-        String query = "select o.cost, o.quantity, o.id, u.name, u.email, b.title, b.description" +
-                "from orders o" +
-                "join book b on b.id = o.book_id" +
-                "join user u on o.user_id = u.id" +
+        String query = "select o.cost, o.quantity, o.id, u.name, u.email, b.title, b.description\n" +
+                "from orders o\n" +
+                "join book b on b.id = o.book_id\n" +
+                "join user u on o.user_id = u.id\n" +
                 "where user_id = %s;".formatted(customer_id);
 
         List<Order> orders = new ArrayList<>();
