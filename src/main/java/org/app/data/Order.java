@@ -17,4 +17,15 @@ public class Order {
     public String[] toCustomerString(){
         return new String[]{String.valueOf(id), book.getTitle(), String.valueOf(quantity), String.valueOf(cost)};
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", cost=" + cost +
+                ", quantity=" + quantity +
+                ", book=" + book.getTitle() +
+                ", user=" + user.getName() +
+                '}';
+    }
 }

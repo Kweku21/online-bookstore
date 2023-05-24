@@ -61,8 +61,8 @@ public class CustomerView extends JFrame {
         profile.addActionListener((event) -> {
             right.remove(right.getComponent(0));
             right.remove(contentPanel);
-            contentPanel = new ProfilePanel(user);
-            right.add(contentPanel);
+
+            right.add(new ProfilePanel(user));
             right.revalidate();
             right.repaint();
         });
@@ -71,18 +71,18 @@ public class CustomerView extends JFrame {
             right.remove(right.getComponent(0));
             right.remove(contentPanel);
 
-            contentPanel = new BooksPanel(user);
-            right.add(contentPanel);
+            right.add(new BooksPanel(user));
             right.revalidate();
             right.repaint();
         });
 
         orders.addActionListener((event) -> {
-            System.out.println("Order Panel");
             right.remove(right.getComponent(0));
             right.remove(contentPanel);
-            contentPanel = new OrdersPanel(user);
-            right.add(contentPanel);
+
+            right.add(new OrdersPanel(user));
+            right.revalidate();
+            right.repaint();
         });
     }
 }

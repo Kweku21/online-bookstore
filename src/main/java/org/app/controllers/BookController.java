@@ -17,12 +17,11 @@ public class BookController {
     }
 
     public List<Book> getAllBooks(){
-        String query = "select b.title, b.description, b.price, b.quantity, bg.name genre, a.name author from book b\n" +
-                        "join book_genre bg on bg.id = b.genre_id\n"+
+        String query = "select b.id, b.title, b.description, b.price, b.quantity, bg.name genre, a.name author\n" +
+                        "from book b\n" +
                         "join book_genre bg on bg.id = b.genre_id\n" +
-                        "join book_author ba on b.id = ba.book_id\n" +
-                        "join author a on a.id = ba.author_id\n" +
-                        "order by b.id desc;";
+                        "join author a on a.book_id = b.id\n" +
+                        "order by b.id desc ;";
 
         List<Book> books = new ArrayList<>();
 
@@ -112,8 +111,6 @@ public class BookController {
         }
 
         return books;
-
-
     }
 
 }

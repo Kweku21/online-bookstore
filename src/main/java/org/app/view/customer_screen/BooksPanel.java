@@ -23,12 +23,11 @@ public class BooksPanel extends ContentPanel {
     private Button getAllBooksButton;
     private Button searchBooksButton;
     private TextField searchField;
-    private User user;
 
     private BookController bookController;
 
     public BooksPanel(User user) {
-        this.user = user;
+        super(user);
         this.bookController = new BookController();
         setLayout(new BorderLayout());
 
@@ -70,7 +69,6 @@ public class BooksPanel extends ContentPanel {
     private void searchBooks() {
         String keyword = searchField.getText();
         searchResults = bookController.searchBooks(keyword);
-        System.out.println(searchResults);
         refreshBookList(searchResults);
     }
 

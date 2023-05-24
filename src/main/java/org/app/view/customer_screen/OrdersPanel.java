@@ -8,6 +8,7 @@ import org.app.data.User;
 import org.app.view.utils.ContentPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,28 +17,30 @@ import java.util.stream.Collectors;
 public class OrdersPanel extends ContentPanel {
 
     JTable table;
+    private List<Order> orders;
 
+    private Choice orderList;
+    private Button getAllBooksButton;
+    private Button searchBooksButton;
+    private TextField searchField;
     private OrderController orderController;
     public OrdersPanel(User user){
         super(user);
         orderController = new OrderController();
 
-        List<Order> orders = orderController.getCustomerOrders(user.getId());
-        String[][] data = new String[orders.size()][];
-        for (int i = 0; i < orders.size(); i++) {
-            data[i] = orders.get(i).toCustomerString();
-        }
+        setLayout(new BorderLayout());
 
-        String[] columnNames = { "Id","Book Title", "Quantity", "Cost" };
+        orderList = new Choice();
+        orderController.getCustomerOrders(user.getId()).forEach(order -> {
+            orderList.add(order.toString());
+        });
+        add(orderList, BorderLayout.CENTER);
 
-        System.out.println(Arrays.deepToString(data));
+        Panel buttonPanel = new Panel(new FlowLayout());
 
-        table = new JTable(data, columnNames);
-        table.setBounds(30, 40, 300, 300);
-//        JScrollPane scrollPane = new JScrollPane(table);
-        add(table);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-        setSize(1500,1000);
+        setVisible(true);
     }
 
 }
