@@ -27,7 +27,7 @@ public class OrderController {
         List<Order> orders = new ArrayList<>();
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 orders.add(
@@ -60,7 +60,7 @@ public class OrderController {
         List<Order> orders = new ArrayList<>();
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 orders.add(
@@ -94,7 +94,7 @@ public class OrderController {
       Order order = null;
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 order = Order.builder()

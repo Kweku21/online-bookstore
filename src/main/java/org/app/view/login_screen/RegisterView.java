@@ -1,6 +1,7 @@
 package org.app.view.login_screen;
 
 import org.app.controllers.UserController;
+import org.app.view.customer_screen.CustomerView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,9 +43,25 @@ public class RegisterView extends JFrame {
         create.addActionListener((event)->{
             userController.createCustomer(name.getText(),phone.getText(),address.getText(),email.getText(),password.getText());
 
-            WindowEvent closingEvent = new WindowEvent(this, WindowEvent. WINDOW_CLOSING);
-            Toolkit.getDefaultToolkit();
+            clearInput();
+            showErrorMessage();
+
+            setVisible(false);
+            AuthView authView = new AuthView();
+            authView.setVisible(true);
         });
 
+    }
+
+    public void showErrorMessage() {
+        JOptionPane.showMessageDialog(this, "Registration Complete, Login to Continue");
+    }
+
+    private void clearInput() {
+        name.setText("");
+        phone.setText("");
+        address.setText("");
+        email.setText("");
+        password.setText("");
     }
 }

@@ -1,6 +1,5 @@
 package org.app.controllers;
 
-import lombok.AllArgsConstructor;
 import org.app.config.DBConnector;
 import org.app.data.Book;
 import org.app.data.Cart;
@@ -29,7 +28,7 @@ public class CartController {
         List<Cart> carts = new ArrayList<>();
 
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 carts.add(
@@ -58,7 +57,7 @@ public class CartController {
                 "where c.status_id =1 and c.id = %s;".formatted(id);
         Cart cart = null;
         try {
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                       cart = Cart.builder()
@@ -83,7 +82,7 @@ public class CartController {
                 "(%s, %s, %s, %s);".formatted(book_id, quantity, 1, user_id);
 
         try {
-            connector.runSQLStatement(query);
+            connector.runSQLResultStatement(query);
         }catch (Exception exception){
             System.out.println(exception);
         }
@@ -93,7 +92,7 @@ public class CartController {
         String query = "update cart set quantity = quantity + %s where id = %s;".formatted(quantity, cart_id);
 
         try {
-            connector.runSQLStatement(query);
+            connector.runSQLResultStatement(query);
         }catch (Exception exception){
             System.out.println(exception);
         }
@@ -103,9 +102,9 @@ public class CartController {
         String query = "update cart set status_id=2 where id = %s;".formatted(cart_id);
 
         try {
-            connector.runSQLStatement(query);
+            connector.runSQLResultStatement(query);
             query = "select * from cart where id=%s".formatted(cart_id);
-            ResultSet resultSet = connector.runSQLStatement(query);
+            ResultSet resultSet = connector.runSQLResultStatement(query);
 
             while (resultSet.next()){
                 Integer user_id = resultSet.getInt("user_id"),
@@ -114,7 +113,7 @@ public class CartController {
 
                 query = "INSERT INTO orders (status_id, user_id, book_id, quantity, order_date, cost) VALUES" +
                         "(3, %s, %s, %s, NOW(), %s)".formatted(user_id, book_id, quantity, quantity*book.getPrice());
-                connector.runSQLStatement(query);
+                connector.runSQLResultStatement(query);
             }
         }catch (Exception exception){
             System.out.println(exception);

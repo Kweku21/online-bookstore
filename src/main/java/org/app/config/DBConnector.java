@@ -19,7 +19,7 @@ public class DBConnector {
 
     }
 
-    public ResultSet runSQLStatement(String query){
+    public ResultSet runSQLResultStatement(String query){
 
         try{
             Statement statement = connection.createStatement();
@@ -30,5 +30,15 @@ public class DBConnector {
             return null;
         }
 
+    }
+
+    public void runSQLExecuteStatement(String query){
+        try{
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        }catch (Exception exception){
+            System.out.println(exception);
+
+        }
     }
 }
