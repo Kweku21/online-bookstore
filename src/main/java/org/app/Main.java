@@ -14,8 +14,8 @@ public class Main {
 
          */
 
-        new CustomerView(new User(1, "john@example.com", "John Do", "Customer"));
-        //new AuthView();
+        //new CustomerView(new User(1, "john@example.com", "John Do", "Customer"));
+       new AuthView();
 
     }
 }
