@@ -3,6 +3,7 @@ package org.app.view.login_screen;
 
 import org.app.controllers.UserController;
 import org.app.data.User;
+import org.app.view.admin_screen.AdminView;
 import org.app.view.customer_screen.CustomerView;
 
 import javax.swing.*;
@@ -56,14 +57,14 @@ public class AuthView extends JFrame {
 
 
             switch (user.getType().toUpperCase()) {
-                /*
-                case ADMIN -> {
+
+                case "ADMIN" -> {
                     setVisible(false);
-                    CustomerView custview = new CustomerView(user.get());
-                    custview.setVisible(true);
+                    AdminView adminView = new AdminView(user);
+                    adminView.setVisible(true);
                 }
 
-                 */
+
                 case "CUSTOMER" -> {
                     setVisible(false);
                     CustomerView customerView = new CustomerView(user);
@@ -86,6 +87,13 @@ public class AuthView extends JFrame {
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        /*String currDirectory = System.getProperty("user.dir");
+        String pathToImage =
+        ImageIcon imageIcon = new ImageIcon("path/to/your/image.png");
+        JLabel imageLabel = new JLabel(imageIcon);
+        add(imageLabel, BorderLayout.NORTH);
+
+         */
         setVisible(true);
     }
 

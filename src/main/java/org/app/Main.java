@@ -8,15 +8,16 @@ import org.app.view.customer_screen.CustomerView;
 public class Main {
 
     public static void main(String[] args) {
+        /*
+        UserController userController = new UserController();
+        Object obj = userController.loginUser("john@example.com", "password123");
+        System.out.println(obj);
+         */
 
-//        UserController userController = new UserController();
-//        Object obj = userController.loginUser("john@example.com", "password123");
-//        System.out.println(obj);
 
+        //new CustomerView(new User(1, "john@example.com", "John Do", "Customer"));
+       new AuthView();
 
-
-        new CustomerView(new User(1, "john@example.com", "John Do", "Customer", "123-456-7890", "123 Main St"));
-        //new AuthView();
 
     }
 }
